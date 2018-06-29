@@ -1,27 +1,74 @@
-// Для асинхронной работы используется пакет micro.
-const { json } = require('micro');
+const express = require('express');
 
-// Запуск асинхронного сервиса.
-module.exports = async req => {
+const port = process.env.PORT || 3000;
+const app = express();
 
-  // Из запроса извлекаются свойства request, session и version.
-  const { request, session, version } = await json(req);
+app.use(express.json());
 
-  // В тело ответа вставляются свойства version и session из запроса.
-  // Подробнее о формате запроса и ответа — в разделе Протокол работы навыка.
-  return {
-    version,
-    session,
-    response: {
+app.post('/', function (req, res) {
 
-      // В свойстве response.text возвращается исходная реплика пользователя.
-      // Если навык был активирован без дополнительной команды,
-      // пользователю нужно сказать "Hello!".
-      text: request.original_utterance || 'Hello!',
+  if (req.body.request.command == "no text")
+  {
+    res.json({
+      version: req.body.version,
+      session: req.body.session,
+      response: {
+        text: "",
+        end_session: false,
+      },
+    });
+  }
 
-      // Свойство response.end_session возвращается со значением false,
-      // чтобы диалог не завершался.
-      end_session: false,
-    },
-  };
-};
+  else if (req.body.request.command == "no version")
+  {
+    res.json({
+      session: req.body.session,
+      response: {
+        text: req.body.request.command || 'Hello!',
+        end_session: false,
+      },
+    });
+  }
+
+  else if (req.body.request.command == "no session")
+  {
+    res.json({
+      version: req.body.version,
+      response: {
+        text: req.body.request.command || 'Hello!',
+        end_session: false,
+      },
+    });
+  }
+
+  else if (req.body.request.command == "end session")
+  {
+    res.json({
+      version: req.body.version,
+      session: req.body.session,
+      response: {
+        text: req.body.request.command || 'Hello!',
+        end_session: true,
+      },
+    });
+  }
+
+  else 
+  {
+    res.json({
+      version: req.body.version,
+      session: req.body.session,
+        response: {
+          text: req.body.request.command || 'Hello!',
+          
+          end_session: false,
+        },
+    })
+  ;}
+});
+
+app.use('*', function (req, res) {
+  res.sendStatus(404);
+});
+
+app.listen(port);
