@@ -5,6 +5,10 @@ const app = express();
 
 app.use(express.json());
 
+app.get('/', function (req, res) {
+    res.send('GET request to the homepage');
+  });
+
 app.post('/', function (req, res) {
 
   if (req.body.request.command == "no text")
