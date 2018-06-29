@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Sviatoslavkh/Alice_Internet#readme",
   "dependencies": {
+    "express": "^4.16.3",
     "micro": "^9.3.2"
   }
 }
