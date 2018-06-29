@@ -1,0 +1,22 @@
+{
+  "name": "alice_internet",
+  "version": "1.0.0",
+  "description": "Alice skill to choose Internet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sviatoslavkh/Alice_Internet.git"
+  },
+  "author": "Sviatoslavkh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sviatoslavkh/Alice_Internet/issues"
+  },
+  "homepage": "https://github.com/Sviatoslavkh/Alice_Internet#readme",
+  "dependencies": {
+    "micro": "^9.3.2"
+  }
+}
