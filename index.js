@@ -11,6 +11,13 @@ app.get('/', function (req, res) {
 
 app.post('/', function (req, res) {
 
+/*
+Если в сессии нет данных -> вопрос №1
+Если в сессии нет данных -> вопрос №1, но есть совпадение с городом -> записываем город и отправляем сообщение №2 (спрашиваем про скорость)
+Если записан город, и в сообщении скорость -> записываем скорость и предлагаем тариф
+Если записан город, и в сообщении скорость
+*/
+
   if (req.body.request.command == "no text")
   {
     res.json({
@@ -62,6 +69,7 @@ app.post('/', function (req, res) {
     res.json({
       version: req.body.version,
       session: req.body.session,
+      city: 'Perm',
         response: {
           text: req.body.request.command || 'Hello!',
           
